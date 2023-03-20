@@ -10,19 +10,27 @@ var productsRouter = require('./routes/products');
 let ordersRouter = require('./routes/orders');
 let categoriesRouter = require('./routes/categories');
 const mongoose = require('mongoose');
+var cookieSession = require('cookie-session')
 
 var app = express();
+
+app.use(cookieSession({
+    name: 'session',
+    keys: ['MySecretKey'/* secret keys */],
+    // Cookie Options
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
 
 require("dotenv").config();
 
 app.use(cors());
 
-// async function init() {
-//     await mongoose.connect("mongodb://127.0.0.1:27017/susanne-arnetzlinder")
-//     .then (() => console.log('databasen är igång'));
-// }
+async function init() {
+    await mongoose.connect("mongodb://127.0.0.1:27017/susanne-arnetzlinder")
+    .then (() => console.log('databasen är igång'));
+}
 
-// init();
+init();
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -31,7 +39,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api/users', usersRouter);
 app.use('/products', productsRouter);
 app.use('/orders', ordersRouter);
 app.use('/categories', categoriesRouter);
