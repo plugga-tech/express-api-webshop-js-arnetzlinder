@@ -10,6 +10,17 @@ import HelloWorld from './components/HelloWorld.vue'
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
 
+      <!-- För VG behöver följande finnas i frontenddelen. 
+        1. Möjlighet att skapa ny användare. 
+        2. En loginruta. 
+        3. Lösenordet ska skickas krypterat. 
+        4. Det ska gå att se vilka produkter som finns i butiken, fördelat på olika kategorier. 
+        5. Varje produkt ska innehålla grundläggande info som pris, namn och bild. 
+        6. Det ska vara möjligt att lägga produkten i en kundvagn. 
+        7. Det ska gå och lägga en order med produkterna i kundvagnen. 
+        8. Det ska finnas en sida med alla skapade orders samt vilka produkter ordrarna innehåller. 
+        9. Inloggning och kundvagn ska sparas i localstorage -->
+
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
