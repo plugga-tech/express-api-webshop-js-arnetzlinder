@@ -9,8 +9,6 @@ const UserModel = require('../models/user_model');
 router.get('/', async(req, res) => {
   const users = await UserModel.find({},'name email').exec()
   res.send(users);
-  res.send(req.sess)
-
 });
 
 // router.post ('/') Hämta en specifik användare

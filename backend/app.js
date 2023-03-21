@@ -38,10 +38,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/api', indexRouter);
 app.use('/api/users', usersRouter);
-app.use('/products', productsRouter);
-app.use('/orders', ordersRouter);
-app.use('/categories', categoriesRouter);
+app.use('/api/products', productsRouter);
+app.use('/api/orders', ordersRouter);
+app.use('/api/categories', categoriesRouter);
 
 module.exports = app;

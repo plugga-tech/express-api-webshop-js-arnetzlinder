@@ -13,7 +13,7 @@ POST http://localhost:3000/api/users/
 Content-Type: application/json
 
 {
-  "id": "// EN USER ID"
+  "id": "6418aa8178bb263ee818fece"
 }
 
 ###
@@ -23,9 +23,9 @@ POST http://localhost:3000/api/users/add
 Content-Type: application/json
 
 {
-  "name": "Test Testsson",
+  "name": "Sussie Testsson",
   "email": "test@mail.com",
-  "password": "test"
+  "password": "test12345"
 }
 
 ###
@@ -53,7 +53,7 @@ GET http://localhost:3000/api/products
 ###
 
 // HÄMTA SPECIFIK PRODUKT
-GET http://localhost:3000/api/products/ // ID PÅ PRODUKT
+GET http://localhost:3000/api/products/641a0b84a0bf6cfc1f4aa9ab
 
 ###
 
@@ -62,9 +62,9 @@ POST http://localhost:3000/api/products/add
 Content-Type: application/json
 
 {
-  "name": "Produkt 1",
-  "description": "Beskrivning av produkt 1",
-  "price": 100, 
+  "name": "Mössa med rosett 2",
+  "description": "Mössa i blommigt tyg med rosett",
+  "price": 75, 
   "lager": 10
 }
 
@@ -79,7 +79,7 @@ POST http://localhost:3000/api/orders/add
 Content-Type: application/json
 
 {
-  "user": "{{getUsers.response.body.$[0].id}}",
+  "user": "6418a54978bb263ee818fecc",
       "products": [
     {
       "productId": "// ID PÅ EN PRODUKT",

@@ -6,8 +6,10 @@ const ProductModel = new ProductSchema ({
     description: String,
     price: Number,
     lager: Number,
-    category: mongoose.Types.ObjectId,
-    ref: 'category'
+    category: {
+        type: mongoose.Types.ObjectId,
+        ref: 'category'
+    }
 });
 
 module.exports = mongoose.model('product', ProductModel);
