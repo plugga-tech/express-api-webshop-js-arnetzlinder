@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import UserLogin from './components/UserLogin.vue';
+import DressPicture from '../public/images'
 </script>
 
 <template>
   <header>
+    <img :src
 
     <div class="wrapper">
 
