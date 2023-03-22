@@ -60,11 +60,11 @@ POST http://localhost:3000/api/products/add
 Content-Type: application/json
 
 {
-  "name": "T-shirt nummer 3",
-  "description": "T-shirt sydd i tyg från Pink Poo design, i storlek 122",
-  "price": 100,
-  "lager": 10,
-  "category": "641a084f3ac2168fa2353e79",
+  "name": "Gymnastikdräkt med tryckt bokstav",
+  "description": "Gymnastikdräkt med bokstavstryck. Storlek 140.",
+  "price": 250,
+  "lager": 50,
+  "category": "641b66d1b9401876a9992cfd",
   "token": "1234key1234"
 }
 
@@ -84,7 +84,7 @@ POST http://localhost:3000/api/categories/add
 Content-Type: application/json
 
 {
-  "name": "Kategori 1",
+  "name": "Gymnastikdräkter",
   "token": "1234key1234"
 }
 
