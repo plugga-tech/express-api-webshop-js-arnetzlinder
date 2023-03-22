@@ -2,6 +2,8 @@ var express = require('express');
 const ProductModel = require('../models/product_model');
 var router = express.Router();
 
+require("dotenv").config();
+
 /* GET users listing. */
 
 
@@ -35,6 +37,7 @@ router.get('/category/:id', async function(req, res, next) {
 
 // router.post ('/add') Skapa en produkt
 router.post('/add', async (req, res) => {
+    console.log('APIKEY is: ' + (process.env.API_KEY))
     if (req.body.token === "1234key1234") {
         let newProduct = await ProductModel.create(req.body);
 
