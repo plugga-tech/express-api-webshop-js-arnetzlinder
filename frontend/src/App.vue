@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import UserLogin from './components/UserLogin.vue';
-import DressPicture from '../public/images'
+import DressPicture from '/images/Klänning i vävt tyg med rosett i ryggen.jpg'
 </script>
 
 <template>
   <header>
-    <img :src
+    <img :src="DressPicture" width="200" class="startingPicture">
 
     <div class="wrapper">
 
@@ -28,6 +28,7 @@ import DressPicture from '../public/images'
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/produkter"> Produkter</RouterLink>
       </nav>
     </div>
   </header>
@@ -41,6 +42,10 @@ header {
   max-height: 100vh;
   background-color: rgb(248, 170, 248);
   padding: 2rem;
+}
+
+.startingPicture {
+  margin: 2rem;
 }
 
 nav {

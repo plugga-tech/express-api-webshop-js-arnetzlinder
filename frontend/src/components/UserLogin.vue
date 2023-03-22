@@ -8,7 +8,10 @@ export default {};
         <h2> För att beställa behöver du logga in nedan</h2>
         <input type="text" placeholder="email">
         <br>
-        <input type="text" placeholder="lösenord">
+        <input type="password" placeholder="lösenord">
+        <br>
+        <button> Logga in</button>
+        <button> Logga ut</button>
     </div>
 </template>
 
