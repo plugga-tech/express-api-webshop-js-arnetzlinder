@@ -60,7 +60,7 @@ POST http://localhost:3000/api/products/add
 Content-Type: application/json
 
 {
-  "name": "Gymnastikdräkt med tryckt bokstav",
+  "name": "Gymnastikdräkt med tryckt bokstav test för env",
   "description": "Gymnastikdräkt med bokstavstryck. Storlek 140.",
   "price": 250,
   "lager": 50,

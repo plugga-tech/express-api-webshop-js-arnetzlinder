@@ -1,9 +1,11 @@
-<script lang="ts">
-export default {};
+<script setup lang="ts">
+import ProductShow from '@/components/ProductShow.vue';
 </script>
 
 <template>
-    <h1> Här kommer du hitta massa roliga saker</h1>
+    <div>
+        <ProductShow />
+    </div>
 </template>
 
 <style scoped>

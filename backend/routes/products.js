@@ -38,7 +38,7 @@ router.get('/category/:id', async function(req, res, next) {
 // router.post ('/add') Skapa en produkt
 router.post('/add', async (req, res) => {
     console.log('APIKEY is: ' + (process.env.API_KEY))
-    if (req.body.token === "1234key1234") {
+    if (req.body.token === process.env.API_KEY) {
         let newProduct = await ProductModel.create(req.body);
 
         console.log(newProduct)
