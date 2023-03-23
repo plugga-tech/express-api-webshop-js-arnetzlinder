@@ -2,7 +2,9 @@ var express = require('express');
 var router = express.Router();
 const crypto = require("crypto-js");
 const mongoose = require('mongoose');
+
 const UserModel = require('../models/user_model');
+
 
 
 // router.get ('/') Hämta alla användare, skicka inte med lösenord
