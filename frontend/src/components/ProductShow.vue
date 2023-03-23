@@ -1,16 +1,8 @@
 <script lang="ts">
-function printProducts() {
-    fetch("http://localhost:3000/api/products")
-    .then(res => res.json())
-    .then(data => {
-        console.log(data);
-    })
-}
 
-printProducts();
 
 export default {
-    name: 'ShowProject',
+    name: 'ProductShow',
     props: ['productData'],
     data() {
         return {
