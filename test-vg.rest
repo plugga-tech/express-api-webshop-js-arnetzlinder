@@ -114,14 +114,14 @@ POST http://localhost:3000/api/orders/add
 Content-Type: application/json
 
 {
-  "user": "// USER ID FÖR DEN SOM SKA SKAPA ORDERN",
+  "user": "6418aa8178bb263ee818fece",
       "products": [
     {
-      "productId": "// ETT PRODUKT ID",
+      "productId": "641b674fb9401876a9992cff",
       "quantity": 1
     },
     {
-      "productId": "// ETT PRODUKT ID",
+      "productId": "641b6785b9401876a9992d03",
       "quantity": 2
     }
   ]

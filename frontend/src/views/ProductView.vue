@@ -4,7 +4,7 @@ import ProductShow from '@/components/ProductShow.vue';
 
 <template>
     <div>
-        <ProductShow />
+        <ProductShow v-for="(products, index) in products" :product-data="product" :key="index" />
     </div>
 </template>
 
