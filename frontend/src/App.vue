@@ -40,7 +40,6 @@ import DressPicture from '../public/images/girldress.jpeg'
 header {
   line-height: 1.5;
   max-height: 100vh;
-  background-color: rgb(248, 170, 248);
   padding: 2rem;
 }
 

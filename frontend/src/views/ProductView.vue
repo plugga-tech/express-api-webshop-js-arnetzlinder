@@ -140,8 +140,5 @@ export default {
     h1 {
         margin: 2rem;
     }
-    .product-view {
-        background-color: rgb(248, 170, 248);
-    }
 
 </style>

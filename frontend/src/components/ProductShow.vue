@@ -22,6 +22,7 @@ export default {
         <p v-html="productData.price" class="product-price"></p>
         <p class="description"> Lagersaldo</p>
         <p v-html="productData.lager" class="product-lager"></p>
+        <button> Beställ</button>
     </div>
 </template>
 
