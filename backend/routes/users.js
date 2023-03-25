@@ -44,12 +44,28 @@ router.post('/login', async (req,res) => {
     res.status(401).json("Incorrect password or email")
   } else {
     // correct
-    req.session.id = crypto.SHA3(Math.random().toString())
+    req.session.id = crypto.SHA3(Math.random().toString()).toString()
     //console.log("Setting session to " + req.session.id + " based on " + Math.random().toString())
-    res.status(200).json("Correct password")
+    res.status(200).json(user)
     
-    user.session = req.session.id
+    user.session = req.session.id;
     user.save()
+  }
+});
+
+router.get('/checklogin', async (req,res) => {
+  if (req.session.id === null) {
+    res.status(401).json("Du är inte inloggad")
+    
+  } else {
+     let user = await UserModel.findOne({session: req.session.id})
+      if (user === null) {
+        // incorrect
+        res.status(401).json("Din session har gått ut")
+      } else {
+        res.status(200).json(user);
+      }
+
   }
 });
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import UserLogin from './components/UserLogin.vue';
-import DressPicture from '/images/Klänning i vävt tyg med rosett i ryggen.jpg'
+import DressPicture from '../public/images/girldress.jpeg'
 </script>
 
 <template>
@@ -26,8 +26,8 @@ import DressPicture from '/images/Klänning i vävt tyg med rosett i ryggen.jpg'
         9. Inloggning och kundvagn ska sparas i localstorage -->
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/orders">Se dina ordrar</RouterLink>
+        <RouterLink to="/about">Skapa användare</RouterLink>
         <RouterLink to="/produkter"> Produkter</RouterLink>
       </nav>
     </div>

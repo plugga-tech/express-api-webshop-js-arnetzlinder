@@ -1,6 +1,11 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h3>Skapa en användare</h3>
+      <input type="text" placeholder="email">
+        <br>
+        <input type="password" placeholder="lösenord">
+        <br>
+        <button> Skapa användare</button>
   </div>
 </template>
 

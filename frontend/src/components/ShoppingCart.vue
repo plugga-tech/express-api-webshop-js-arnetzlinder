@@ -1,0 +1,1 @@
+//Hämta data. Använd localstorage för att spara det kunden väljer att köpa. Setitem tar två parametrar, det du vill spara ("produkt") och det du vill spara på ("produktantal")

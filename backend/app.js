@@ -23,7 +23,14 @@ app.use(cookieSession({
 
 require("dotenv").config();
 
-app.use(cors());
+
+var corsOptions = {
+    "origin": "http://localhost",
+    "credentials": true
+  }
+
+
+app.use(cors(corsOptions));
 
 async function init() {
     await mongoose.connect("mongodb://127.0.0.1:27017/susanne-arnetzlinder")
