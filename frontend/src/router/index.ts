@@ -4,6 +4,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {    
+      path: '/produkter',
+      name: 'Produkter',
+      component: () => import('../views/ProductView.vue')
+    },
     {
       path: '/orders',
       name: 'Se dina ordrar',
@@ -17,13 +22,6 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
     },
-    {    
-      path: '/produkter',
-      name: 'Produkter',
-      component: () => import('../views/ProductView.vue')
-    }
-
-
   ]
 })
 
