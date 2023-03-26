@@ -2,7 +2,7 @@
     <div>
       <div class="row">
         <div class="col-md-3">
-          <shopping-cart :cart="state.cart"></shopping-cart>
+          <shopping-cart cart="state.cart"></shopping-cart>
         </div>
         <div class="col-md-9">
           <show-category
@@ -84,11 +84,13 @@
           });
       },
       addToCart(product: CartItem) {
+        console.log(product)
         let foundItem = this.state.cart.find((item: CartItem) => item.id === product.id) as CartItem;
         if (foundItem) {
           foundItem.amount++;
         } else {
-          this.state.cart.push({ ...product, amount: 1 });
+          console.log("Nytt object i varukorgen")
+          this.state.cart.push(product);
         }
       }
     },

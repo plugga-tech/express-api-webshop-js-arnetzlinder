@@ -2,7 +2,7 @@
   <div>
     <h2>Kundvagn</h2>
     <ul>
-      <li v-for="product in cartItems" :key="product.id">
+      <li v-for="product in cart" :key="product._id">
         {{ product.name }} - {{ product.price }}
       </li>
     </ul>
@@ -11,15 +11,17 @@
 </template>
 
 <script lang="ts">
-interface CartItem {
-  id: number;
-  name: string;
-  price: number;
-  amount: number;
-}
+  interface CartItem {
+    id: string,
+    name: string,
+    price: number,
+    image: string,
+    amount: number
+  }
 
 export default {
   name: "ShoppingCart",
+  props: ['cart'],
   data() {
     return {
       cartItems: [] as CartItem[],
