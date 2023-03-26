@@ -54,12 +54,12 @@ router.post('/login', async (req,res) => {
 });
 
 router.get('/checklogin', async (req,res) => {
-  if (req.session.id === null) {
+  if (typeof req.session.id === 'undefined') {
     res.status(401).json("Du är inte inloggad")
     
   } else {
      let user = await UserModel.findOne({session: req.session.id})
-      if (user === null) {
+      if (typeof user === 'undefined') {
         // incorrect
         res.status(401).json("Din session har gått ut")
       } else {

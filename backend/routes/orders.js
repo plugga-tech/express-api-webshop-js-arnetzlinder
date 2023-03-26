@@ -11,40 +11,48 @@ const ProductModel = require('../models/product_model');
 // router.post ('/add') Skapa en order
 router.post('/add', async (req, res) => {
   console.log(req.body);
-  // let user = await UserModel.findOne({session: req.session.id})
-  // let outOfStock = false;
-  // if (user === null) {
-  //   // incorrect
-  //   res.status(401).json("DU är inte inloggad")
-  // } else {
-    //req.body.user = user.id
-    let order = await OrderModel.create(req.body);
-    console.log(order); // nån products array som frontend postat in, + user.id från ovan
 
-    let products = req.body.products;
 
-    products.forEach(async ({productId, quantity}) => {
-      let product = await ProductModel.findById({_id: productId});
-      console.log(product);
-      if (product) {
-        product.lager -= quantity;
-        await product.save();
-      }
-    });
-
-  //     if (product.lager > 0) {
-  //       outOfStock = true;
-
-    // ändra i alla products så att lagersaldot minskar
-    // if (outOfStock) {
-    //   res.status(200).json("Order lagd, men barasåruvet så var nån grej lite slut");
+  if (req.session.id === null) {
+    res.status(401).json("Du är inte inloggad")
     
-    // } else {
+  } else {
+    let user = await UserModel.findOne({session: req.session.id})
+    if (user === null) {
+       // incorrect
+      res.status(401).json("Din session har gått ut")
+    } else {
 
-    //   res.status(200).json("Order lagd, allt fanns i lager!!!!1111!oneoneone")
-    // }
+      let outOfStock = false;
+      req.body.user = user._id
+      let order = await OrderModel.create(req.body);
+      console.log(order); // nån products array som frontend postat in, + user.id från ovan
+      let products = req.body.products;
 
-  //}
+      products.forEach(async ({productId, quantity}) => {
+        let product = await ProductModel.findById({_id: productId});
+        console.log(product);
+        if (product) {
+          product.lager -= quantity;
+          await product.save();
+          if (product.lager < 0) {
+            outOfStock = true;
+          }
+        }
+      });
+
+      if (outOfStock) {
+        res.status(200).json("Order lagd, men barasåruvet så var nån grej lite slut");
+      } else {
+        res.status(200).json("Order lagd, allt fanns i lager!!!!1111!oneoneone")
+      }
+
+    
+       
+    }
+
+  }
+
 });
 
 
@@ -92,7 +100,7 @@ router.get('/', async (req, res) => {
         // incorrect
         res.status(401).json("Din session har gått ut")
       } else {
-        let order = await OrderModel.find({ user: user._id });
+        let order = await OrderModel.find({ user: user._id }).populate({path: 'products.productId', model: 'product'}).populate('user');
         console.log(order); // nån products array som frontend postat in, + user.id från ovan
         res.status(200).json(order);
        

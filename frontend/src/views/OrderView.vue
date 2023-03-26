@@ -1,63 +1,69 @@
-<script setup lang="ts">
-import OrderShow from '@/components/OrderShow.vue';
+<script lang="ts">
 import { reactive } from 'vue';
-// import { onMounted } from 'vue';
 
-const state = reactive({
-    orders: []
-});
+interface Order {
+  _id: string;
+  products: { _id: string, quantity: number, productId: {
+      
+        _id: string,
+        name: string,
+        price: number
+    } 
+  }[];
+}
 
 
-fetch("http://localhost:3000/api/orders", {credentials: 'include'})
-.then((response) => response.json())
-.then((data) => { 
-    console.log(data)
-    state.orders = data;
-       //console.log(products)
+export default {
+  props: [],
+  setup() {
+    const state = reactive({
+      orders: [] as Order[],
+      products: []
     });
 
+    const fetchOrdersAndProducts = async () => {
+      const [orders] = await Promise.all([
+        fetch('http://localhost:3000/api/orders', { credentials: 'include' }).then(response => response.json()),
+        //fetch('http://localhost:3000/api/products').then(response => response.json())
+      ]);
+      state.orders = orders as Order[];
+      console.log(orders);
+    };
+
+    fetchOrdersAndProducts();
+
+    return {
+      state
+    };
+  }
+};
 </script>
 
 <template>
-    <div class="order-view">
-        <OrderShow v-for="(order, index) in state.orders" :order-data="order" :key="index" />
+  <div class="order-view">
+    <h3> Du har beställt följande:</h3>
+    <div v-for="order in state.orders" :key="order._id" class="order-show">
+      <p>Ordernummer: {{ order._id }}</p>
+      <div v-for="product in order.products" :key="product._id">
+        <p>Produkt: {{ product.productId.name }}</p>
+        <p>Antal: {{ product.quantity }}</p>
+        <p>Pris: {{ product.productId.price }} kr</p> 
+      </div>
+
     </div>
+  </div>
 </template>
-
-<!-- <template>
-    <div>
-        <div v-for="product in products" :key="product.id">
-            <img :src="require(`@/public/images/${product.imageFileName}`)" :alt="product.name">
-            <h2> {{ product.name }}</h2>
-            <p> {{ product.description }}</p>
-        </div>
-    </div>
-</template>
-
-<script lang="ts">
-export default {
-    data() {
-        return {
-            products: []
-        };
-    },
-    mounted() {
-        fetch('http://localhost:3000/api/products')
-        .then(response => response.json())
-        .then(data => {
-            this.products = data;
-        })
-        .catch(error => {
-            console.error('Error fetching products', error);
-        });
-    }
-};
-
-</script> -->
 
 <style scoped>
-    h1 {
-        margin: 2rem;
+    .order-view {
+        margin: 1rem;
+        font-size: 1rem;
     }
 
+    h3 {
+        font-weight: bold;
+    }
+    .order-show {
+        margin: 1rem;
+    }
 </style>

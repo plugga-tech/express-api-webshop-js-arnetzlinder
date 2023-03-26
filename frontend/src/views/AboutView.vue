@@ -1,11 +1,10 @@
+<script setup lang="ts">
+import CreateUser from '@/components/CreateUser.vue';
+</script>
+
 <template>
   <div class="about">
-    <h3>Skapa en användare</h3>
-      <input type="text" placeholder="email">
-        <br>
-        <input type="password" placeholder="lösenord">
-        <br>
-        <button> Skapa användare</button>
+    <CreateUser />
   </div>
 </template>
 

@@ -39,11 +39,11 @@ export default {
            .then(data => {
                 console.log(data)
                 if (data.name) {
-                    this.userGreeting = "Godmorgon " + data.name;
+                    this.userGreeting = "Välkommen " + data.name;
                     localStorage.setItem("username", data.name);
                 }
                 else {
-                    //userGreeting.innerText = "Inloggning misslyckades, var vänlig och kontrollera användarnamn och lösenord."
+                    this.userGreeting = "Inloggning misslyckades, var vänlig och kontrollera användarnamn och lösenord."
                 }
     
            });
