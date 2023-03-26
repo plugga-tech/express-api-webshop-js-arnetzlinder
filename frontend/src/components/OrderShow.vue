@@ -11,8 +11,9 @@ export default {
 </script>
 
 <template>
-    <div class="show-orders">
+    <div class="show-orders"> Dina ordrar:
      <h2 v-html="orderData._id" class="product-name"></h2>
+
         <!-- <img v-bind:src="'/public/images/' + orderData._id + '.jpeg'" class="productImage">
 
         <p class="description"> Beskrivning:</p>

@@ -6,7 +6,10 @@
             <li v-for="product2 in state.cart" :key="product2.id">
                 {{ product2.name }} - {{ product2.amount }} st, à {{ product2.price }} kr
             </li>
-    </ul>
+          </ul>
+          <button class="orderBtn" @click="sendOrder"> Beställ</button>
+
+
           <!-- <shopping-cart cart="state.cart"></shopping-cart> -->
         </div>
         <div class="col-md-9">
@@ -113,31 +116,55 @@
         console.log(this.state.cart)
                             
 
+      },
+      sendOrder() {
+        
+        interface Order {
+          products: {
+          productId: string |undefined;
+          quantity: number;
+          }[];
+        }
 
-        //if(productContent) {
-        //   let cartSum = this.state.cart.find((item: CartItem) => item.id === productContent._id);
-        //   if(cartSum) {
-        //     cartSum.amount++;
-        //   } else {
-        //     this.state.cart.push({
-        //       id: productContent._id,
-        //       name: productContent.name,
-        //       price: productContent.price,
-        //       image: productContent.image,
-        //       amount: 1
-        //     });
-        //   }
-        // }
-        // let foundItem = this.state.cart.find((item: CartItem) => item.id === product.id) as CartItem;
-        // if (foundItem) {
-        //   foundItem.amount++;
-        // } else {
-        //   console.log("Nytt object i varukorgen")
-        //   this.state.cart.push(product);
-        // }
-      }
+        let orderToSend: Order = {
+          products: [],
+        };
+       
+        this.state.cart.forEach(element => {
+            console.log(element)
+            orderToSend.products.push({
+              productId: element.id,
+              quantity: element.amount,
+
+
+            })
+        })
+
+        fetch("http://localhost:3000/api/orders/add", {
+            credentials: 'include',
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            }, 
+            body: JSON.stringify(orderToSend)
+           })
+           .then(res => res.json())
+           .then(data => {
+                console.log(data)
+                // if (data.name) {
+                //     this.userGreeting = "Godmorgon " + data.name;
+                //     localStorage.setItem("username", data.name);
+                // }
+                // else {
+                //     //userGreeting.innerText = "Inloggning misslyckades, var vänlig och kontrollera användarnamn och lösenord."
+                // }
+                })
+                this.state.cart = [];
+                window.alert("Tack för att du provade min webbshop! Jag finns på github @arnetzlinder")
+                    
+      },
     },
-  
+
     beforeMount() {
       Promise.all([
         fetch('http://localhost:3000/api/products', { credentials: 'include' }).then(
@@ -158,6 +185,13 @@
 <style scoped>
     h1 {
         margin: 2rem;
+    }
+
+    .orderBtn {
+      width: 4rem;
+      margin: 1rem;
+      font-size: 1rem;
+      margin-left: 2rem;
     }
 
 </style>
