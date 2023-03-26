@@ -55,7 +55,7 @@ export default {
            })
            .then(res => res.json())
            .then(data => {
-                console.log(data)
+                
                 if (data.name) {
                     this.userGreeting = "Godmorgon " + data.name;
                 }

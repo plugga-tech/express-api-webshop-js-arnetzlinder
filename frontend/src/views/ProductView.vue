@@ -1,140 +1,114 @@
-<script lang="ts">
-import ProductShow from '@/components/ProductShow.vue';
-import ShowCategory from '@/components/ShowCategory.vue';
-import { reactive } from 'vue';
-// import { onMounted } from 'vue';
+<template>
+    <div>
+      <div class="row">
+        <div class="col-md-3">
+          <shopping-cart :cart="state.cart"></shopping-cart>
+        </div>
+        <div class="col-md-9">
+          <show-category
+            v-for="category in state.categories"
+            :key="category._id"
+            :category-data="category"
+            @click="filterProducts(category._id)">
+        </show-category>
+          <div class="row">
+            <product-show
+              v-for="product in state.products"
+              :key="product._id"
+              :product-data="product"
+              :id="product._id"
+              @add-to-cart="addToCart">
+            </product-show>
 
-const state = reactive({
-    products: [],
-    categories: []
-});
+          </div>
+        </div>
 
-// const stat = reactive ({
-//     categories: []
-// });
+      </div>
+    </div>
+  </template>
+  
+  <script lang="ts">
+  import ProductShow from '../components/ProductShow.vue';
+  import ShowCategory from '../components/ShowCategory.vue';
+  import ShoppingCart from '../components/ShoppingCart.vue';
+  import { reactive } from 'vue';
 
+  interface CartItem {
+    id: string,
+    name: string,
+    price: number;
+    image: string,
+    amount: number;
+  }
 
-// fetch("http://localhost:3000/api/products", {credentials: 'include'})
-// .then((response) => response.json())
-// .then((data) => { 
-//     console.log(data)
-//     state.products = data;
-//        //console.log(products)
-//     });
+  interface Product {
+  _id: string;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  category: string;
+  }
 
-// fetch("http://localhost:3000/api/categories")
-// .then((response) => response.json())
-// .then((data) => {
-//     console.log(data);
-//     stat.categories = data;
-// });
-
-// function filterProducts(event: Event, productId: String) {
-//     //event.preventDefault();
-//     console.log("Filtering products!")
-//     fetch("http://localhost:3000/api/products/category/" + productId, {credentials: 'include'})
-// .then((response) => response.json())
-// .then((data) => { 
-//     console.log(data)
-//     state.products = data;
-//        //console.log(products)
-//     });
-
-// }
-
-export default {
+  interface Category {
+  _id: string;
+  name: string;
+  }
+  
+  export default {
     name: 'ProductView',
     components: {
-    ProductShow,
-    ShowCategory,
+      ProductShow,
+      ShowCategory,
+      ShoppingCart
     },
     props: [],
     data() {
-        return {
-            state: reactive ({
-                categories: [],
-                products: []
-            }),
-            productId: ""
-            
-        };
+      return {
+        state: reactive({
+          categories: [] as Category[],
+          products: [] as Product[],
+          cart: [] as CartItem[]
+        }),
+        productId: ''
+      };
     },
     methods: {
-        filterProducts(productId: String) {
-        //event.preventDefault();
-        console.log("Filtering products!")
-        fetch("http://localhost:3000/api/products/category/" + productId, {credentials: 'include'})
-            .then((response) => response.json())
-            .then((data) => { 
-        console.log(data)
-        state.products = data;
-       //console.log(products)
-        });
-        }
-    },
-    beforeMount () {
-        fetch("http://localhost:3000/api/products", {credentials: 'include'})
-.then((response) => response.json())
-.then((data) => { 
-    console.log(data)
-    this.state.products = data;
-       //console.log(products)
-    });
-
-fetch("http://localhost:3000/api/categories")
-.then((response) => response.json())
-.then((data) => {
-    console.log(data);
-    this.state.categories = data;
-});
-
-
-    }
-
-
-}
-
-
-
-</script>
-
-<template>
-    <div class="product-view" :onMyevent="filterProducts">
-        <ShowCategory v-for="(category, index) in state.categories" :category-data="category" :key="index" v-bind:on-click="filterProducts" :inheritAttrs="false"/>
-        <ProductShow v-for="(product, index) in state.products" :product-data="product" :key="index" />
-    </div>
-</template>
-
-<!-- <template>
-    <div>
-        <div v-for="product in products" :key="product.id">
-            <img :src="require(`@/public/images/${product.imageFileName}`)" :alt="product.name">
-            <h2> {{ product.name }}</h2>
-            <p> {{ product.description }}</p>
-        </div>
-    </div>
-</template>
-
-<script lang="ts">
-export default {
-    data() {
-        return {
-            products: []
-        };
-    },
-    mounted() {
-        fetch('http://localhost:3000/api/products')
-        .then(response => response.json())
-        .then(data => {
-            this.products = data;
+      filterProducts(categoryId: string) {
+        fetch('http://localhost:3000/api/products/category/' + categoryId, {
+          credentials: 'include'
         })
-        .catch(error => {
-            console.error('Error fetching products', error);
-        });
+          .then((response) => response.json())
+          .then((data) => {
+            this.state.products = data;
+          });
+      },
+      addToCart(product: CartItem) {
+        let foundItem = this.state.cart.find((item: CartItem) => item.id === product.id) as CartItem;
+        if (foundItem) {
+          foundItem.amount++;
+        } else {
+          this.state.cart.push({ ...product, amount: 1 });
+        }
+      }
+    },
+  
+    beforeMount() {
+      Promise.all([
+        fetch('http://localhost:3000/api/products', { credentials: 'include' }).then(
+          (response) => response.json()
+        ),
+        fetch('http://localhost:3000/api/categories').then((response) =>
+          response.json()
+        )
+      ]).then(([products, categories]) => {
+        this.state.products = products;
+        this.state.categories = categories;
+      });
     }
-};
-
-</script> -->
+  };
+  </script>
+  
 
 <style scoped>
     h1 {

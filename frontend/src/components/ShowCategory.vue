@@ -17,7 +17,8 @@ export default {
 
 <template>
     <!-- <div class="show-category"> -->
-     <button @click="$emit('myevent', categoryData._id)" class="category-name"> {{ categoryData.name  }}</button>
+     <button @click="$emit('click', categoryData._id)" class="category-name"> {{ categoryData.name  }}</button>
+
         <!-- <img v-bind:src="'/public/images/' + orderData._id + '.jpeg'" class="productImage">
 
         <p class="description"> Beskrivning:</p>

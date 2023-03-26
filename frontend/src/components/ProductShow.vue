@@ -1,12 +1,12 @@
 <script lang="ts">
 export default {
     name: 'ProductShow',
-    props: ['productData'],
+    props: ['productData', '_id'],
     data() {
         return {
         };
     },
-    
+    emits: ['add-to-cart']
 };
 </script>
 
@@ -22,7 +22,10 @@ export default {
         <p v-html="productData.price" class="product-price"></p>
         <p class="description"> Lagersaldo</p>
         <p v-html="productData.lager" class="product-lager"></p>
-        <button> Beställ</button>
+        <p class="description" v-if="productData.lager>10"></p>
+        <p class="description" v-else-if="productData.lager<10 && productData.lager>0">Nästan slutsålt</p>
+        <p class="description" v-else>Slutsålt</p>
+        <button @click="$emit('add-to-cart', productData._id)" class="product-name">Lägg i kundvagn!</button>
     </div>
 </template>
 
