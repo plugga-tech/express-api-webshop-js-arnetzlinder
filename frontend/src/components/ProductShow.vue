@@ -25,7 +25,7 @@ export default {
         <p class="description" v-if="productData.lager>10"></p>
         <p class="description" v-else-if="productData.lager<10 && productData.lager>0">Nästan slutsålt</p>
         <p class="description" v-else>Slutsålt</p>
-        <button @click="$emit('add-to-cart', productData)" class="product-name">Lägg i kundvagn!</button>
+        <button @click="$emit('add-to-cart')" class="product-name">Lägg i kundvagn!</button>
     </div>
 </template>
 
