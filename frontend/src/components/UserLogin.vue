@@ -26,7 +26,6 @@ export default {
                 email: loginEmail,
                 password: loginPassword
             }
-        console.log(loginUser);
         fetch("http://localhost:3000/api/users/login", {
             credentials: 'include',
             method: "POST",
@@ -37,7 +36,6 @@ export default {
            })
            .then(res => res.json())
            .then(data => {
-                console.log(data)
                 if (data.name) {
                     this.userGreeting = "Välkommen " + data.name;
                     localStorage.setItem("username", data.name);

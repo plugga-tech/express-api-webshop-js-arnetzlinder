@@ -23,7 +23,6 @@ export default {
                 email: createEmail,
                 password: createPassword
             }
-        console.log(createUser);
         fetch("http://localhost:3000/api/users/add", {
             credentials: 'include',
             method: "POST",
@@ -34,7 +33,6 @@ export default {
            })
            .then(res => res.json())
            .then(data => {
-                console.log(data)
                 if (data.email) {
                     this.userGreeting = "Tack för att du skapat en användare hos mig " + data.email;
                 }

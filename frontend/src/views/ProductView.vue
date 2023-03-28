@@ -82,28 +82,19 @@
     },
     methods: {
       filterProducts(categoryId: string) {
-        console.log("Filtered on "+categoryId)
         fetch('http://localhost:3000/api/products/category/' + categoryId, {
           credentials: 'include'
         })
           .then((response) => response.json())
           .then((data) => {
             this.state.products = data;
-            console.log(data);
           });
       },
       addToCart(product: String) {
-
-        //console.log(product)
         let productContent = this.state.products.find((p: Product) => p._id === product);
         let cartContent = this.state.cart.find((p: CartItem) => p.id === product) as CartItem;
 
-        console.log("cartcontent" + cartContent)
-
         if (typeof cartContent === 'undefined') {
-
-        //console.log(productContent);
-        console.log("Product name: "+productContent?.name)
         this.state.cart.push({ id:  productContent?._id, 
                               name:  productContent?.name,
                               price: productContent?.price,
@@ -113,7 +104,7 @@
             cartContent.amount++;
         
         }
-        console.log(this.state.cart)
+      
                             
 
       },
@@ -131,7 +122,6 @@
         };
        
         this.state.cart.forEach(element => {
-            console.log(element)
             orderToSend.products.push({
               productId: element.id,
               quantity: element.amount,
@@ -150,14 +140,7 @@
            })
            .then(res => res.json())
            .then(data => {
-                console.log(data)
-                // if (data.name) {
-                //     this.userGreeting = "Godmorgon " + data.name;
-                //     localStorage.setItem("username", data.name);
-                // }
-                // else {
-                //     //userGreeting.innerText = "Inloggning misslyckades, var vänlig och kontrollera användarnamn och lösenord."
-                // }
+            console.log(data);
                 })
                 this.state.cart = [];
                 window.alert("Tack för att du provade min webbshop! Jag finns på github @arnetzlinder")

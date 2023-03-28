@@ -22,7 +22,6 @@ export default {
     };
   },
   onMounted() {
-      console.log(this.cart)
   },
   methods: {
 

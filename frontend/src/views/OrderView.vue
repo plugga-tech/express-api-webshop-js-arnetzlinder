@@ -27,7 +27,6 @@ export default {
         //fetch('http://localhost:3000/api/products').then(response => response.json())
       ]);
       state.orders = orders as Order[];
-      console.log(orders);
     };
 
     fetchOrdersAndProducts();
