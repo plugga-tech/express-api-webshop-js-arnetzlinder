@@ -5,9 +5,6 @@ const UserModel = require('../models/user_model');
 const OrderModel = require('../models/order_model');
 const ProductModel = require('../models/product_model');
 
-
-
-
 // router.post ('/add') Skapa en order
 router.post('/add', async (req, res) => {
   console.log(req.body);
@@ -47,15 +44,11 @@ router.post('/add', async (req, res) => {
         res.status(200).json("Order lagd, allt fanns i lager!!!!1111!oneoneone")
       }
 
-    
-       
     }
 
   }
 
 });
-
-
 
 // router.get('/all') Hämta alla ordrar, key måste anges för att få tillgång till ordrar
 router.get('/all/:token', async function(req, res) {
@@ -71,10 +64,6 @@ router.get('/all/:token', async function(req, res) {
   }
 })
 
-
-//router.get('/all) Hämta alla ordrar med fel key (detta är för testets skull, ej kodas)
-
-//router.post('/add') Skapa order för specifik user
 
 //router.post('/user') Hämta orders för en viss user, skall misslyckas (401) utan key
 router.post('/user', async function(req, res) {
@@ -110,6 +99,5 @@ router.get('/', async (req, res) => {
 
 
 })
-
 
 module.exports = router;

@@ -4,9 +4,6 @@ var router = express.Router();
 
 require("dotenv").config();
 
-/* GET users listing. */
-
-
 // router.get ('/') Hämta alla produkter
 router.get('/', async function(req, res, next) {
     const products = await ProductModel.find()
@@ -48,16 +45,5 @@ router.post('/add', async (req, res) => {
     
     }
   });
-
-//   const ProductModel = new ProductSchema ({
-//     name: String,
-//     description: String,
-//     price: Number,
-//     stock: Number,
-//     category: mongoose.Types.ObjectId,
-//     ref: 'category'
-// });
-
-  
 
 module.exports = router;

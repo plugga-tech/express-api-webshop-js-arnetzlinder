@@ -11,7 +11,7 @@ router.get('/', async(req, res) => {
 
 // router.post ('/add') Skapa kategori, key måste anges. Om ej key, ge tillbaka 401
 router.post('/add', async (req, res) => {
-  if (req.body.token === "1234key1234") {
+  if (req.body.token === process.env.API_KEY) {
       let newCategory = await CategoryModel.create(req.body);
       console.log(newCategory)
       res.send(newCategory)
